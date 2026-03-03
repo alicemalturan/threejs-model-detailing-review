@@ -24,6 +24,7 @@ Bu proje, web üzerinde profesyonel seviye 3D model inceleme deneyimi sağlamak 
 - Gömülü animasyonları oynat/durdur + hız ayarı
 - Hotspot bilgi noktaları
 - Varyant seçici (renk değiştirme)
+- Detaylı hata yönetimi (zaman aşımı, format hatası, eksik kaynak bildirimi, tekrar dene)
 
 ## Çalıştırma
 
