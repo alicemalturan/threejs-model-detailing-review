@@ -1,52 +1,43 @@
-# LieutenantHead - Makine İncelemesi (Three.js 3D Model İnteraktif İnceleme Aracı)
+# LieutenantHead - Gelişmiş 3D Model İnceleme (Three.js)
 
-Bu proje, bir 3D modeli web üzerinde interaktif olarak inceleyebileceğiniz ve animasyonlarla detaylandırabileceğiniz bir üç boyutlu model görüntüleyicisidir. `three.js` ve `gsap` kütüphaneleriyle oluşturulmuştur.
+Bu proje, web üzerinde profesyonel seviye 3D model inceleme deneyimi sağlamak için geliştirilmiş modern bir Three.js görüntüleyicisidir.
 
-## Özellikler
+## Sunulan Özellikler
 
-- **3D Model Görüntüleme:** GLTF formatındaki bir modeli yükler ve kullanıcıya sunar.
-- **Fare ile Kontrol:** Sahneyi fareyle döndürebilir ve yakınlaştırabilirsiniz.
-- **Parçala / Topla Butonları:** Modelin parçalarını animasyonla dışarı dağıtıp tekrar toplayabilirsiniz.
-- **Otomatik Tur:** Kamerayı model etrafında otomatik döndürme.
-- **Parça Vurgulama:** Farenizi herhangi bir parçanın üstüne getirdiğinizde o parça vurgulanır.
-- **Tam Ekran Modu:** "F" tuşu ile tam ekrana geçiş desteği.
-- **Responsive Tasarım:** Sahne ekran boyutuna göre otomatik olarak yeniden boyutlanır.
+### 1) Temel Etkileşim ve Görüntüleme
+- 360° döndürme, kaydırma (pan) ve yakınlaştırma (zoom)
+- Otomatik döndürme (auto-rotate)
+- Tek tıkla standart bakış açıları (ön / arka / yan / üst)
+- Poster benzeri yükleme ekranı ve ilerleme çubuğu
 
-## Ekran Görüntüsü
+### 2) Teknik ve Görsel Kalite
+- PBR malzeme yaklaşımı (MeshStandardMaterial)
+- Aydınlatma ve gölge yoğunluğu kontrolü
+- HDR/IBL ortam seçimi (venice/studio)
+- GLTF / GLB / OBJ / STL format desteği
+- Ölçüm aracı (iki nokta arası mesafe)
+- Kesit alma (section plane) slider
+- Draco + Meshopt desteği (GLTF/GLB için)
 
-> Buraya ilgili model ve arayüzden bir screenshot ekleyebilirsiniz.
+### 3) UX ve Gelişmiş Özellikler
+- AR ile görüntüleme butonu (Android Scene Viewer akışı)
+- Gömülü animasyonları oynat/durdur + hız ayarı
+- Hotspot bilgi noktaları
+- Varyant seçici (renk değiştirme)
+- Detaylı hata yönetimi (zaman aşımı, format hatası, eksik kaynak bildirimi, tekrar dene)
 
-## Kullanılan Kütüphaneler
+## Çalıştırma
 
-- [three.js](https://threejs.org/) (Web tabanlı 3D grafik motoru)
-- [GSAP](https://greensock.com/gsap/) (Animasyon kütüphanesi)
-- [OrbitControls](https://threejs.org/docs/#examples/en/controls/OrbitControls) (Kamera kontrolü)
-- [GLTFLoader](https://threejs.org/docs/#examples/en/loaders/GLTFLoader) (GLTF dosya yükleyici)
+```bash
+python3 -m http.server 4173
+```
 
-## Kurulum ve Çalıştırma
+Ardından:
 
-1. **Projeyi Klonlayın:**
-    ```bash
-    git clone https://github.com/alicemalturan/threejs-model-detailing-review.git
-    cd threejs-model-detailing-review
-    ```
+- `http://localhost:4173/test.html`
 
-2. **Model Dosyasını Ekleyin:**
-   - Proje kök dizinine `lieutenantHead.gltf` dosyasını yerleştirin (ve bağlı dosyaları, ör: tekstürler).
-   - Not: Demo model yerine kendi `.gltf` dosyanızı da kullanabilirsiniz.
+## Kullanım Notları
 
-3. **Başlatın:**
-   - Bilgisayarınızda canlı bir sunucu (VSCode Live Server vb.) kullanarak `test.html` dosyasını açın.  
-   - Dosyayı doğrudan açarsanız CORS hatası alabilirsiniz; canlı sunucu önerilir.
-
-## Nasıl Kullanılır?
-
-- **Modeli Döndür:** Farenin sol tuşu + sürükle
-- **Yakınlaştır/Uzaklaştır:** Fare tekerleği
-- **Parçala:** "PARÇALA" butonuna tıkla
-- **Topla:** "TOPLA" butonuna tıkla
-- **Otomatik Tur:** "OTOMATİK TUR" butonuna tıkla
-- **Vurgulama:** Herhangi bir parçanın üstüne fareyi getirin
-- **Tam Ekran:** "F" tuşuna basın
-
-## Dosya Yapısı
+- Varsayılan model: `lieutenantHead.gltf`
+- Alt panelden farklı formatta model dosyası seçerek canlı yükleme yapabilirsiniz.
+- Mobilde AR için Android + Scene Viewer uyumlu tarayıcı gerekir.
