@@ -217,6 +217,7 @@
 
       function updateStatus(text, isError = false) { ui.status.textContent = text; ui.status.classList.toggle('status-error', isError); }
 
+
       function beginLoading(message = 'Model yükleniyor...') {
         window.clearTimeout(state.loadTimeoutId);
         ui.loading.style.display = 'grid';
@@ -270,6 +271,39 @@
         });
         state.hotspotData = points;
       }
+
+      function cleanupModel() {
+        state.pieces = []; state.originalData = []; state.hotspots.forEach((h) => h.remove()); state.hotspots = [];
+        if (state.model) scene.remove(state.model);
+        if (state.measureLine) { scene.remove(state.measureLine); state.measureLine.geometry.dispose(); state.measureLine.material.dispose(); state.measureLine = null; }
+        ui.measureLabel.style.display = 'none'; state.measurePoints = [];
+      }
+
+      function toPBR(material) {
+        if (material?.isMeshStandardMaterial || material?.isMeshPhysicalMaterial) return material;
+        const pbr = new THREE.MeshStandardMaterial({ color: material?.color || new THREE.Color(0xd9d9d9), map: material?.map || null, metalness: 0.15, roughness: 0.55 });
+        return pbr;
+      }
+
+      function createHotspots(bounds) {
+        const points = [
+          { name: 'Ön Bölge', p: new THREE.Vector3(0, bounds.max.y * 0.5, bounds.max.z) },
+          { name: 'Tepe', p: new THREE.Vector3(0, bounds.max.y, 0) },
+          { name: 'Yan Bölge', p: new THREE.Vector3(bounds.max.x, 0, 0) }
+        ];
+        points.forEach((item) => {
+          const el = document.createElement('button');
+          el.className = 'hotspot';
+          el.textContent = item.name;
+          el.addEventListener('click', () => alert(`${item.name}: Bu alana özel bilgi balonu / teknik açıklama eklenebilir.`));
+          document.body.appendChild(el);
+          state.hotspots.push(el);
+          item.element = el;
+          item.position = item.p;
+        });
+        state.hotspotData = points;
+      }
+
 
       function setupModel(root, animations = []) {
         cleanupModel();
